@@ -199,3 +199,7 @@ The agent **cannot**:
 | Terraform | >= 1.5.0 |
 | AWS Provider | >= 5.0.0, < 6.0.0 |
 | Archive Provider | >= 2.0.0, < 3.0.0 |
+
+## License
+
+LakeLens is licensed under the [MIT License](LICENSE).
