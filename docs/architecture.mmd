@@ -1,0 +1,46 @@
+%% LakeLens — AI Security Investigation Assistant
+%% Legacy flow reference; the current account-boundary diagram is maintained in Lucid.
+flowchart TB
+    analyst["Security analyst<br/>Bedrock console or API / CLI client"]
+
+    subgraph deployed["Provisioned by this Terraform root module"]
+        agent["Amazon Bedrock Agent + alias<br/>Configured Claude inference profile<br/>Session summary memory: 30 days"]
+        actions["OpenAPI action group<br/>Query / schema context / explain results"]
+        validator["AWS Lambda · Python 3.12<br/>8-step SQL validation<br/>Database / table allowlists · LIMIT · time window<br/>Athena execution, polling and timeout cancellation"]
+        roles["IAM roles<br/>Bedrock Agent role + Lambda executor role"]
+        logs["Amazon CloudWatch Logs<br/>Lambda structured logs"]
+    end
+
+    subgraph existing["Existing AWS prerequisites — not provisioned here"]
+        hub["AWS Security Hub<br/>Security findings"]
+        lake["Amazon Security Lake<br/>OCSF-normalized findings in Amazon S3"]
+        catalog["AWS Glue Data Catalog<br/>Security Lake database and tables"]
+        lf["AWS Lake Formation<br/>Manual SELECT grant to Lambda role"]
+        athena["Amazon Athena<br/>Configured workgroup"]
+        results["Amazon S3<br/>Athena query results bucket"]
+    end
+
+    analyst -->|"1 · Investigation question"| agent
+    agent -->|"2 · SQL or schema request"| actions
+    actions -->|"3 · Invoke"| validator
+    validator -->|"4 · Validated SQL only"| athena
+    athena -->|"Read findings"| lake
+    athena -->|"Resolve table metadata"| catalog
+    lf -.->|"Govern data access"| lake
+    hub -->|"Existing ingestion"| lake
+    athena -->|"Write query output"| results
+    athena -->|"5 · Results via Athena API"| validator
+    validator -->|"6 · Structured results or errors"| actions
+    actions -->|"Return tool response"| agent
+    agent -->|"7 · Summary, MITRE ATT&CK mappings and control recommendations"| analyst
+    validator -->|"Schema context lookup"| catalog
+    validator -->|"Execution and validation logs"| logs
+    roles -.->|"Model and tool permissions"| agent
+    roles -.->|"Query, catalog, results and logging permissions"| validator
+
+    classDef managed fill:#e8f1ff,stroke:#2563eb,color:#172554
+    classDef prerequisite fill:#f1f5f9,stroke:#64748b,color:#0f172a
+    classDef person fill:#fff7ed,stroke:#ea580c,color:#431407
+    class agent,actions,validator,roles,logs managed
+    class hub,lake,catalog,lf,athena,results prerequisite
+    class analyst person

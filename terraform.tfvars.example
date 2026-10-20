@@ -1,0 +1,58 @@
+# =============================================================================
+# Required Variables
+# =============================================================================
+
+# AWS region for all resources
+aws_region = "us-east-2"
+
+# Deployment environment identifier
+environment = "dev"
+
+# Security Lake database names the agent is permitted to query
+security_lake_database_names = ["amazon_security_lake_glue_db_us_east_2"]
+
+# Name of the existing S3 bucket for Athena query results
+athena_output_bucket_name = "my-athena-results-bucket"
+
+# =============================================================================
+# Optional Variables (defaults shown)
+# =============================================================================
+
+# Prefix for resource naming
+# name_prefix = "security-lake-bedrock"
+
+# Bedrock foundation model ID for the agent
+# bedrock_foundation_model_id = "us.anthropic.claude-sonnet-4-20250514-v1:0"
+
+# Bedrock embedding model ID for the knowledge base
+# bedrock_embedding_model_id = "amazon.titan-embed-text-v2:0"
+
+# Security Lake table names the agent is permitted to query
+# allowed_security_lake_tables = ["amazon_security_lake_table_us_east_2_sh_findings_2_0"]
+
+# Table name prefixes the agent is permitted to query
+# allowed_security_lake_table_prefixes = []
+
+# Existing Athena workgroup name for query execution
+# athena_workgroup_name = "primary"
+
+# Optional existing S3 bucket for Knowledge Base documents (null = create new)
+# knowledge_base_bucket_name = null
+
+# Maximum LIMIT value allowed in non-aggregate queries (1–10000)
+# max_query_limit = 1000
+
+# Maximum days a query time filter can look back (1–365)
+# max_lookback_days = 90
+
+# Maximum Athena query execution time in seconds (1–900)
+# query_timeout_seconds = 60
+
+# CloudWatch Logs retention period in days
+# log_retention_days = 90
+
+# Tags to apply to all taggable resources
+# tags = {
+#   Project = "security-lake-investigation"
+#   Owner   = "security-team"
+# }

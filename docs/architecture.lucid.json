@@ -1,0 +1,580 @@
+{
+  "version": 1,
+  "pages": [
+    {
+      "id": "architecture",
+      "title": "LakeLens Architecture",
+      "shapes": [
+        {
+          "id": "security-account",
+          "type": "rectangleContainer",
+          "boundingBox": {
+            "x": -50,
+            "y": 100,
+            "w": 1340,
+            "h": 1070
+          },
+          "style": {
+            "fill": {
+              "type": "color",
+              "color": "#FFFFFF"
+            },
+            "stroke": {
+              "color": "#243F61",
+              "width": 2,
+              "style": "solid"
+            }
+          },
+          "assistedLayout": false
+        },
+        {
+          "id": "title",
+          "type": "text",
+          "boundingBox": {
+            "x": -380,
+            "y": 0,
+            "w": 1660,
+            "h": 80
+          },
+          "text": "<p style=\"font-size:22px;text-align:left\"><b>LakeLens \u2014 AI Security Investigation Assistant</b><br>Bedrock explains. Athena proves. Lambda validates.</p>"
+        },
+        {
+          "id": "analyst",
+          "type": "rectangle",
+          "boundingBox": {
+            "x": -280,
+            "y": 230,
+            "w": 100,
+            "h": 64
+          },
+          "text": "<p style=\"font-size:16px\">Analyst</p>",
+          "style": {
+            "fill": {
+              "type": "color",
+              "color": "#F1F5F9"
+            },
+            "stroke": {
+              "color": "#64748B",
+              "width": 1,
+              "style": "solid"
+            }
+          }
+        },
+        {
+          "id": "analystlabel",
+          "type": "text",
+          "boundingBox": {
+            "x": -350,
+            "y": 310,
+            "w": 240,
+            "h": 90
+          },
+          "text": "<p style=\"font-size:18px;text-align:center\"><b>1. Security analyst</b><br><span style=\"font-size:16px\">Console / API / CLI</span></p>"
+        },
+        {
+          "id": "agent",
+          "type": "namedShape",
+          "className": "ArchAmazonBedrockAWS2024",
+          "boundingBox": {
+            "x": 418,
+            "y": 230,
+            "w": 64,
+            "h": 64
+          },
+          "text": " "
+        },
+        {
+          "id": "agentlabel",
+          "type": "text",
+          "boundingBox": {
+            "x": 330,
+            "y": 310,
+            "w": 240,
+            "h": 90
+          },
+          "text": "<p style=\"font-size:18px;text-align:center\"><b>2. Bedrock Agent</b><br><span style=\"font-size:16px\">Claude + 30-day memory</span></p>"
+        },
+        {
+          "id": "actions",
+          "type": "rectangle",
+          "boundingBox": {
+            "x": 700,
+            "y": 230,
+            "w": 100,
+            "h": 64
+          },
+          "text": "<p style=\"font-size:16px\">OpenAPI</p>",
+          "style": {
+            "fill": {
+              "type": "color",
+              "color": "#F1F5F9"
+            },
+            "stroke": {
+              "color": "#64748B",
+              "width": 1,
+              "style": "solid"
+            }
+          }
+        },
+        {
+          "id": "actionslabel",
+          "type": "text",
+          "boundingBox": {
+            "x": 630,
+            "y": 310,
+            "w": 240,
+            "h": 90
+          },
+          "text": "<p style=\"font-size:18px;text-align:center\"><b>3. Action group</b><br><span style=\"font-size:16px\">OpenAPI tool calls</span></p>"
+        },
+        {
+          "id": "lambda",
+          "type": "namedShape",
+          "className": "ArchAWSLambdaAWS2024",
+          "boundingBox": {
+            "x": 1018,
+            "y": 230,
+            "w": 64,
+            "h": 64
+          },
+          "text": " "
+        },
+        {
+          "id": "lambdalabel",
+          "type": "text",
+          "boundingBox": {
+            "x": 930,
+            "y": 310,
+            "w": 240,
+            "h": 90
+          },
+          "text": "<p style=\"font-size:18px;text-align:center\"><b>4. Lambda validator</b><br><span style=\"font-size:16px\">SQL checks + execution</span></p>"
+        },
+        {
+          "id": "lf",
+          "type": "namedShape",
+          "className": "ArchAWSLakeFormationAWS2024",
+          "boundingBox": {
+            "x": 118,
+            "y": 530,
+            "w": 64,
+            "h": 64
+          },
+          "text": " "
+        },
+        {
+          "id": "lflabel",
+          "type": "text",
+          "boundingBox": {
+            "x": 30,
+            "y": 610,
+            "w": 240,
+            "h": 90
+          },
+          "text": "<p style=\"font-size:18px;text-align:center\"><b>Lake Formation *</b><br><span style=\"font-size:16px\">Manual SELECT grant</span></p>"
+        },
+        {
+          "id": "hub",
+          "type": "namedShape",
+          "className": "ArchAWSSecurityHubAWS2024",
+          "boundingBox": {
+            "x": 418,
+            "y": 530,
+            "w": 64,
+            "h": 64
+          },
+          "text": " "
+        },
+        {
+          "id": "hublabel",
+          "type": "text",
+          "boundingBox": {
+            "x": 330,
+            "y": 610,
+            "w": 240,
+            "h": 90
+          },
+          "text": "<p style=\"font-size:18px;text-align:center\"><b>Security Hub *</b><br><span style=\"font-size:16px\">Finding ingestion</span></p>"
+        },
+        {
+          "id": "lake",
+          "type": "namedShape",
+          "className": "ArchAmazonSecurityLakeAWS2024",
+          "boundingBox": {
+            "x": 718,
+            "y": 530,
+            "w": 64,
+            "h": 64
+          },
+          "text": " "
+        },
+        {
+          "id": "lakelabel",
+          "type": "text",
+          "boundingBox": {
+            "x": 630,
+            "y": 610,
+            "w": 240,
+            "h": 90
+          },
+          "text": "<p style=\"font-size:18px;text-align:center\"><b>Security Lake *</b><br><span style=\"font-size:16px\">OCSF findings in S3</span></p>"
+        },
+        {
+          "id": "athena",
+          "type": "namedShape",
+          "className": "ArchAmazonAthenaAWS2024",
+          "boundingBox": {
+            "x": 1018,
+            "y": 530,
+            "w": 64,
+            "h": 64
+          },
+          "text": " "
+        },
+        {
+          "id": "athenalabel",
+          "type": "text",
+          "boundingBox": {
+            "x": 930,
+            "y": 610,
+            "w": 240,
+            "h": 90
+          },
+          "text": "<p style=\"font-size:18px;text-align:center\"><b>5. Athena *</b><br><span style=\"font-size:16px\">Validated SQL / results</span></p>"
+        },
+        {
+          "id": "iam",
+          "type": "namedShape",
+          "className": "ArchAWSIdentityandAccessManagementAWS2024",
+          "boundingBox": {
+            "x": 118,
+            "y": 830,
+            "w": 64,
+            "h": 64
+          },
+          "text": " "
+        },
+        {
+          "id": "iamlabel",
+          "type": "text",
+          "boundingBox": {
+            "x": 30,
+            "y": 910,
+            "w": 240,
+            "h": 90
+          },
+          "text": "<p style=\"font-size:18px;text-align:center\"><b>IAM roles</b><br><span style=\"font-size:16px\">Agent + Lambda access</span></p>"
+        },
+        {
+          "id": "logs",
+          "type": "namedShape",
+          "className": "ArchAmazonCloudWatchAWS2024",
+          "boundingBox": {
+            "x": 418,
+            "y": 830,
+            "w": 64,
+            "h": 64
+          },
+          "text": " "
+        },
+        {
+          "id": "logslabel",
+          "type": "text",
+          "boundingBox": {
+            "x": 330,
+            "y": 910,
+            "w": 240,
+            "h": 90
+          },
+          "text": "<p style=\"font-size:18px;text-align:center\"><b>CloudWatch Logs</b><br><span style=\"font-size:16px\">Lambda execution logs</span></p>"
+        },
+        {
+          "id": "results",
+          "type": "namedShape",
+          "className": "ArchAmazonSimpleStorageServiceAWS2024",
+          "boundingBox": {
+            "x": 718,
+            "y": 830,
+            "w": 64,
+            "h": 64
+          },
+          "text": " "
+        },
+        {
+          "id": "resultslabel",
+          "type": "text",
+          "boundingBox": {
+            "x": 630,
+            "y": 910,
+            "w": 240,
+            "h": 90
+          },
+          "text": "<p style=\"font-size:18px;text-align:center\"><b>Results bucket *</b><br><span style=\"font-size:16px\">Athena query output</span></p>"
+        },
+        {
+          "id": "glue",
+          "type": "namedShape",
+          "className": "ResAWSGlueDataCatalogAWS2024",
+          "boundingBox": {
+            "x": 1018,
+            "y": 830,
+            "w": 64,
+            "h": 64
+          },
+          "text": " "
+        },
+        {
+          "id": "gluelabel",
+          "type": "text",
+          "boundingBox": {
+            "x": 930,
+            "y": 910,
+            "w": 240,
+            "h": 90
+          },
+          "text": "<p style=\"font-size:18px;text-align:center\"><b>Glue Data Catalog *</b><br><span style=\"font-size:16px\">Athena + Lambda schema</span></p>"
+        },
+        {
+          "id": "foot",
+          "type": "text",
+          "boundingBox": {
+            "x": -380,
+            "y": 1230,
+            "w": 1660,
+            "h": 100
+          },
+          "text": "<p style=\"font-size:16px;text-align:left\">* Existing prerequisites in the same security account. Other AWS components are provisioned by Terraform.<br>The analyst accesses the account through the Bedrock console or authenticated API / CLI.<br>Results return along the request path. Recommendations only; remediation is separate.<br>Regional resources use the configured Region (default: us-east-2). IAM is account-wide; model inference follows the configured profile.</p>"
+        },
+        {
+          "id": "account-title",
+          "type": "text",
+          "boundingBox": {
+            "x": 20,
+            "y": 120,
+            "w": 1200,
+            "h": 60
+          },
+          "text": "<p style=\"font-size:20px;text-align:left\"><b>AWS security account \u2014 single deployment account</b></p>"
+        }
+      ],
+      "lines": [
+        {
+          "id": "ask",
+          "lineType": "straight",
+          "endpoint1": {
+            "type": "shapeEndpoint",
+            "style": "none",
+            "shapeId": "analyst",
+            "position": {
+              "x": 1,
+              "y": 0.5
+            }
+          },
+          "endpoint2": {
+            "type": "shapeEndpoint",
+            "style": "arrow",
+            "shapeId": "agent",
+            "position": {
+              "x": 0,
+              "y": 0.5
+            }
+          },
+          "stroke": {
+            "color": "#64748B",
+            "width": 2,
+            "style": "solid"
+          }
+        },
+        {
+          "id": "tool",
+          "lineType": "straight",
+          "endpoint1": {
+            "type": "shapeEndpoint",
+            "style": "none",
+            "shapeId": "agent",
+            "position": {
+              "x": 1,
+              "y": 0.5
+            }
+          },
+          "endpoint2": {
+            "type": "shapeEndpoint",
+            "style": "arrow",
+            "shapeId": "actions",
+            "position": {
+              "x": 0,
+              "y": 0.5
+            }
+          },
+          "stroke": {
+            "color": "#64748B",
+            "width": 2,
+            "style": "solid"
+          }
+        },
+        {
+          "id": "invoke",
+          "lineType": "straight",
+          "endpoint1": {
+            "type": "shapeEndpoint",
+            "style": "none",
+            "shapeId": "actions",
+            "position": {
+              "x": 1,
+              "y": 0.5
+            }
+          },
+          "endpoint2": {
+            "type": "shapeEndpoint",
+            "style": "arrow",
+            "shapeId": "lambda",
+            "position": {
+              "x": 0,
+              "y": 0.5
+            }
+          },
+          "stroke": {
+            "color": "#64748B",
+            "width": 2,
+            "style": "solid"
+          }
+        },
+        {
+          "id": "sql",
+          "lineType": "straight",
+          "endpoint1": {
+            "type": "shapeEndpoint",
+            "style": "none",
+            "shapeId": "lambdalabel",
+            "position": {
+              "x": 0.5,
+              "y": 1
+            }
+          },
+          "endpoint2": {
+            "type": "shapeEndpoint",
+            "style": "arrow",
+            "shapeId": "athena",
+            "position": {
+              "x": 0.5,
+              "y": 0
+            }
+          },
+          "stroke": {
+            "color": "#64748B",
+            "width": 2,
+            "style": "solid"
+          }
+        },
+        {
+          "id": "read",
+          "lineType": "straight",
+          "endpoint1": {
+            "type": "shapeEndpoint",
+            "style": "none",
+            "shapeId": "athena",
+            "position": {
+              "x": 0,
+              "y": 0.5
+            }
+          },
+          "endpoint2": {
+            "type": "shapeEndpoint",
+            "style": "arrow",
+            "shapeId": "lake",
+            "position": {
+              "x": 1,
+              "y": 0.5
+            }
+          },
+          "stroke": {
+            "color": "#64748B",
+            "width": 2,
+            "style": "solid"
+          }
+        },
+        {
+          "id": "ingest",
+          "lineType": "straight",
+          "endpoint1": {
+            "type": "shapeEndpoint",
+            "style": "none",
+            "shapeId": "hub",
+            "position": {
+              "x": 1,
+              "y": 0.5
+            }
+          },
+          "endpoint2": {
+            "type": "shapeEndpoint",
+            "style": "arrow",
+            "shapeId": "lake",
+            "position": {
+              "x": 0,
+              "y": 0.5
+            }
+          },
+          "stroke": {
+            "color": "#64748B",
+            "width": 2,
+            "style": "solid"
+          }
+        },
+        {
+          "id": "metadata",
+          "lineType": "straight",
+          "endpoint1": {
+            "type": "shapeEndpoint",
+            "style": "none",
+            "shapeId": "athenalabel",
+            "position": {
+              "x": 0.65,
+              "y": 1
+            }
+          },
+          "endpoint2": {
+            "type": "shapeEndpoint",
+            "style": "arrow",
+            "shapeId": "glue",
+            "position": {
+              "x": 0.5,
+              "y": 0
+            }
+          },
+          "stroke": {
+            "color": "#64748B",
+            "width": 2,
+            "style": "solid"
+          }
+        },
+        {
+          "id": "output",
+          "lineType": "straight",
+          "endpoint1": {
+            "type": "shapeEndpoint",
+            "style": "none",
+            "shapeId": "athenalabel",
+            "position": {
+              "x": 0.25,
+              "y": 1
+            }
+          },
+          "endpoint2": {
+            "type": "shapeEndpoint",
+            "style": "arrow",
+            "shapeId": "results",
+            "position": {
+              "x": 0.5,
+              "y": 0
+            }
+          },
+          "stroke": {
+            "color": "#64748B",
+            "width": 2,
+            "style": "solid"
+          }
+        }
+      ]
+    }
+  ]
+}

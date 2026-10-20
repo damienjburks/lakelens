@@ -1,0 +1,176 @@
+openapi: "3.0.0"
+info:
+  title: "Security Lake Investigation API"
+  version: "1.0.0"
+  description: >-
+    API for the Security Lake Investigation Assistant Action Group.
+    All operations are read-only retrieval and explanation only.
+    No operations modify, update, or delete AWS resources or Security Hub finding states.
+paths:
+  /generateAndRunAthenaQuery:
+    post:
+      operationId: generateAndRunAthenaQuery
+      summary: Validate and execute an Athena SQL query against Security Lake tables
+      description: >-
+        Validates the provided SQL query for safety (read-only, approved tables,
+        time filters, row limits) and executes it against the configured Security
+        Lake database via Amazon Athena. Returns structured results with a summary.
+        Use this operation when the analyst asks a question that requires querying
+        Security Hub findings data stored in Security Lake.
+      parameters:
+        - name: question
+          in: query
+          required: false
+          description: >-
+            The analyst's original natural language question that prompted this query.
+            Provides context for result summarization.
+          schema:
+            type: string
+        - name: query
+          in: query
+          required: true
+          description: >-
+            The SQL SELECT query to validate and execute against Security Lake.
+            Must be a read-only SELECT or CTE+SELECT statement targeting approved tables
+            with appropriate LIMIT and time filter clauses.
+          schema:
+            type: string
+        - name: database
+          in: query
+          required: false
+          description: >-
+            The target Security Lake database name to query against.
+            Must be in the approved databases list.
+          schema:
+            type: string
+        - name: time_window
+          in: query
+          required: false
+          description: >-
+            The time range for the query, expressed as a duration string
+            (e.g., "7d" for 7 days, "30d" for 30 days, "24h" for 24 hours).
+            Used to scope the query to a specific lookback period.
+          schema:
+            type: string
+        - name: max_results
+          in: query
+          required: false
+          description: >-
+            Maximum number of result rows to return. Must be between 1 and the
+            configured maximum query limit (default: 1000).
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Query execution result (success or validation error)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: ["success", "error"]
+                  query:
+                    type: string
+                  results:
+                    type: array
+                    items:
+                      type: object
+                  summary:
+                    type: string
+                  validation_errors:
+                    type: array
+                    items:
+                      type: string
+  /getSecurityLakeSchemaContext:
+    post:
+      operationId: getSecurityLakeSchemaContext
+      summary: Retrieve schema metadata for a Security Lake table
+      description: >-
+        Returns schema metadata (column names, data types, partition keys) for the
+        specified Security Lake table. Use this operation to understand table structure
+        before generating queries. Only approved tables can be queried.
+      parameters:
+        - name: table_name
+          in: query
+          required: true
+          description: >-
+            The name of the Security Lake table to retrieve schema information for.
+            Must be in the approved tables list or match an approved table prefix.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Schema metadata result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: ["success", "error"]
+                  query:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      type: object
+                  summary:
+                    type: string
+                    nullable: true
+                  validation_errors:
+                    type: array
+                    items:
+                      type: string
+  /explainQueryResults:
+    post:
+      operationId: explainQueryResults
+      summary: Explain and summarize Athena query results
+      description: >-
+        Takes a previously executed SQL query and its results, and returns a
+        structured explanation with a human-readable summary. Use this operation
+        when query results need additional context or interpretation for the analyst.
+      parameters:
+        - name: query
+          in: query
+          required: true
+          description: >-
+            The SQL query that was previously executed and produced the results
+            to be explained.
+          schema:
+            type: string
+        - name: results
+          in: query
+          required: true
+          description: >-
+            The JSON-formatted query results to explain. Should be the results
+            array returned from a previous generateAndRunAthenaQuery call.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Explanation result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: ["success", "error"]
+                  query:
+                    type: string
+                  results:
+                    type: array
+                    items:
+                      type: object
+                  summary:
+                    type: string
+                    nullable: true
+                  validation_errors:
+                    type: array
+                    items:
+                      type: string
